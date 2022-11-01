@@ -6,7 +6,8 @@ const compile = require("./ejs-compile").compile;
 const { Command } = require('commander');
 const program = new Command();
 const pkg = require("../package.json");
-const cc = require("node-console-colors");
+require ('ansicolor').nice
+
 program
     .version(pkg.version)
     .description('Compile all views/*.ejs files into a single /public/js/views.js file')
@@ -18,7 +19,7 @@ program
     });
 
 program.parse(process.argv); 
-console.log(cc.set("fg-green","|- EJS Views succesfully Compiled!"));  
 
+console.log((`\n|--- EJS Views succesfully Compiled`).green);  
 
 exports.compile = compile;

@@ -1,6 +1,6 @@
 {
   "name": "ejsc-views",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Compile all views/*.ejs files into a single /public/js/views.js file",
   "main": "bin/ejsc.js",
   "bin": {
@@ -26,10 +26,10 @@
   },
   "homepage": "https://github.com/souhailaS/ejs-compile#readme",
   "dependencies": {
+    "ansicolor": "^1.1.100",
     "commander": "^9.4.1",
     "ejs": "^3.1.8",
     "fs-extra": "^10.1.0",
     "glob-fs": "^0.1.7"
   }
-
 }

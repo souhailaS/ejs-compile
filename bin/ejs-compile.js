@@ -8,7 +8,7 @@ const fs = require("fs-extra");
 const ejs = require("ejs");
 const glob = require("glob-fs")({ gitignore: true });
 const path = require("path");
-const cc = require("node-console-colors");
+require ('ansicolor').nice
 
 /**
  *
@@ -18,8 +18,10 @@ const cc = require("node-console-colors");
 function c(view, details = false) {
   let v = view.replace(/\//g, "_").replace(/\.ejs$/, "");
 
-  console.log(cc.set("fg-purple","|- "), v);
-
+  
+  if (details) {
+    console.log((`|--- Compiling ${v}`).blue);
+  }
   let template = new String(fs.readFileSync(view));
   let f = ejs.compile(template, { client: true });
 
