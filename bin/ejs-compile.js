@@ -41,6 +41,7 @@ function c(view, details = false) {
  *
  * @param {*} views_dir default: views
  * @param {*} output_dir default: public/js
+ * @param {*} details default: false
  */
 function compile(views_dir = "views", output_dir = "public/js", details = false) {
   let compiled = glob
