@@ -16,7 +16,7 @@ require ('ansicolor').nice
  * @returns
  */
 function c(view, details = false) {
-  let v = view.replace(/\//g, "_").replace(/\.ejs$/, "");
+  let v = view.replace(/\//g, "_").replace(/-/g,"_").replace(/\.ejs$/, "");
 
   
   if (details) {
@@ -53,7 +53,7 @@ function compile(views_dir = "views", output_dir = "public/js", details = false)
      console.log("views_include_setup",locals);
      return function(path, d) {
          console.log("ejs.views_include",path,d);
-         return ejs["views_"+path.replace(/\\\//g,"_")]({...d,...locals}, null, ejs.views_include(locals));
+         return ejs["views_"+path.replace(/\\\//g,"_").replace(/-/g,"_")]({...d,...locals}, null, ejs.views_include(locals));
      }
  };
  ${compiled}`;
