@@ -1,5 +1,5 @@
 
-#EJSC views
+# EJSC views
 
 `ejcs-views` Compiles all `<views_dir>/*.ejs` files into a single `<views_dir>/views.js` file.
 
