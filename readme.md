@@ -1,7 +1,7 @@
 
-# EJSC views
+# EJS Compiled Views
 
-`ejcs-views` Compiles all `<views_dir>/*.ejs` files into a single `<views_dir>/views.js` file.
+`ejsc-views` Compiles all `<views_dir>/*.ejs` files into a single `<views_dir>/views.js` file.
 
 To install `ejcs-views` module use: `npm i ejsc-views`
 
