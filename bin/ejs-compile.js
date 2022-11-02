@@ -8,7 +8,7 @@ const fs = require("fs-extra");
 const ejs = require("ejs");
 const glob = require("glob-fs")({ gitignore: true });
 const path = require("path");
-require ('ansicolor').nice
+require("ansicolor").nice;
 
 /**
  *
@@ -16,11 +16,13 @@ require ('ansicolor').nice
  * @returns
  */
 function c(view, details = false) {
-  let v = view.replace(/\//g, "_").replace(/-/g,"_").replace(/\.ejs$/, "");
+  let v = view
+    .replace(/\//g, "_")
+    .replace(/-/g, "_")
+    .replace(/\.ejs$/, "");
 
-  
   if (details) {
-    console.log((`|--- Compiling ${v}`).blue);
+    console.log(`|--- Compiling ${v}`.blue);
   }
   let template = new String(fs.readFileSync(view));
   let f = ejs.compile(template, { client: true });
@@ -43,7 +45,11 @@ function c(view, details = false) {
  * @param {*} output_dir default: public/js
  * @param {*} details default: false
  */
-function compile(views_dir = "views", output_dir = "public/js", details = false) {
+function compile(
+  views_dir = "views",
+  output_dir = "public/js",
+  details = false
+) {
   let compiled = glob
     .readdirSync(path.join(views_dir, "**/*.ejs"))
     .map((view) => c(view, details))
@@ -51,7 +57,7 @@ function compile(views_dir = "views", output_dir = "public/js", details = false)
 
   let output = `//EJS Compiled Views - This file was automatically generated on ${new Date()}
  ejs.views_include = function(locals) {
-     console.log("views_include_setup",locals);
+     ${details? 'console.log("views_include_setup",locals);':''}
      return function(path, d) {
          console.log("ejs.views_include",path,d);
          return ejs["views_"+path.replace(/\\\//g,"_").replace(/-/g,"_")]({...d,...locals}, null, ejs.views_include(locals));
@@ -59,6 +65,9 @@ function compile(views_dir = "views", output_dir = "public/js", details = false)
  };
  ${compiled}`;
 
+  if (!fs.existsSync(output_dir)) {
+    fs.mkdirSync(output_dir);
+  }
   fs.writeFile(path.join(output_dir, "views.js"), output);
 }
 
