@@ -53,7 +53,9 @@ function compile(
 ) {
 
   // do something line using fs : glob.readdirSync(join(cwd,views_dir, "**/*.ejs"))
-  let compiled = fs
+  
+  try{
+    let compiled = fs
     .readdirSync(join(cwd, views_dir))
     .filter((f) => f.endsWith(".ejs"))
     .map((f) => join(cwd, views_dir, f))
@@ -76,6 +78,11 @@ function compile(
   fs.writeFileSync(join(cwd, output_dir, "views.js"), output);
   console.log((`\n|--- EJS Views successfully Compiled`).green);  
   console.log((`|--- ${join(cwd, output_dir, "views.js")}`).green);
+  }
+  catch(e){
+    console.log((`\n|--- EJS Views Compilation Failed -- Views directory not found`).red);  
+    console.log((`Make sure you are running the command from the directory that contains views/ directory`).red);
+  }
 }
 
 const _compile = compile;
