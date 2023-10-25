@@ -1,5 +1,5 @@
 {
-  "name": "ejsc-views",
+  "name": "ejsc",
   "version": "1.1.0",
   "description": "Compile all views/*.ejs files into a single /public/js/views.js file",
   "main": "bin/ejsc.js",
@@ -20,7 +20,7 @@
     "views",
     "express.js"
   ],
-  "author": "cesare pautasso",
+  "author": "souhaila serbout, cesare pautasso",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/souhailaS/ejs-compile/issues"
