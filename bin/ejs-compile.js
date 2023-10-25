@@ -4,11 +4,11 @@
  *
  * Compile all views/*.ejs files into a single /public/js/views.js file
  */
-const fs = require("fs-extra");
-const ejs = require("ejs");
-const glob = require("glob-fs")({ gitignore: true });
-const path = require("path");
-require("ansicolor").nice;
+import fs from "fs";
+import { compile as __compile } from "ejs";
+import { join } from "path";
+import colors from "ansicolor";
+colors.nice;
 
 /**
  *
@@ -25,7 +25,7 @@ function c(view, details = false) {
     console.log(`|--- Compiling ${v}`.blue);
   }
   let template = new String(fs.readFileSync(view));
-  let f = ejs.compile(template, { client: true });
+  let f = __compile(template, { client: true });
 
   let f_str = f.toString();
 
@@ -48,16 +48,21 @@ function c(view, details = false) {
 function compile(
   views_dir = "views",
   output_dir = "public/js",
-  details = false
+  details = false,
+  cwd = process.cwd()
 ) {
-  let compiled = glob
-    .readdirSync(path.join(views_dir, "**/*.ejs"))
-    .map((view) => c(view, details))
+
+  // do something line using fs : glob.readdirSync(join(cwd,views_dir, "**/*.ejs"))
+  let compiled = fs
+    .readdirSync(join(cwd, views_dir))
+    .filter((f) => f.endsWith(".ejs"))
+    .map((f) => join(cwd, views_dir, f))
+    .map((f) => c(f, details))
     .join("\n");
 
   let output = `//EJS Compiled Views - This file was automatically generated on ${new Date()}
  ejs.views_include = function(locals) {
-     ${details? 'console.log("views_include_setup",locals);':''}
+     ${details ? 'console.log("views_include_setup",locals);' : ''}
      return function(path, d) {
          console.log("ejs.views_include",path,d);
          return ejs["views_"+path.replace(/\\\//g,"_").replace(/-/g,"_")]({...d,...locals}, null, ejs.views_include(locals));
@@ -68,7 +73,10 @@ function compile(
   if (!fs.existsSync(output_dir)) {
     fs.mkdirSync(output_dir);
   }
-  fs.writeFile(path.join(output_dir, "views.js"), output);
+  fs.writeFileSync(join(cwd, output_dir, "views.js"), output);
+  console.log((`\n|--- EJS Views successfully Compiled`).green);  
+  console.log((`|--- ${join(cwd, output_dir, "views.js")}`).green);
 }
 
-exports.compile = compile;
+const _compile = compile;
+export { _compile as compile };

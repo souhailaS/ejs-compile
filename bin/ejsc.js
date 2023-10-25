@@ -1,12 +1,13 @@
-#!/usr/bin/env node
+#!/usr/bin/env node --no-warnings
 /**
 * CLI Usage: ejsc --views [views_dir] --output [output_dir]
 */
-const compile = require("./ejs-compile").compile;
-const { Command } = require('commander');
+import { compile } from "./ejs-compile.js";
+import { Command } from 'commander';
 const program = new Command();
-const pkg = require("../package.json");
-require ('ansicolor').nice
+import pkg from "../package.json" assert { type: "json" };
+import colors from "ansicolor";
+colors.nice;
 
 program
     .version(pkg.version)
@@ -15,11 +16,12 @@ program
     .option('-o, --output <output_dir>', 'output directory', 'public/js')
     .option('-d, --details', 'display the compiled views')
     .action((options) => {
-        compile(options.views, options.output, options.details);
+        compile(options.views, options.output, options.details, process.cwd());
     });
 
 program.parse(process.argv); 
 
-console.log((`\n|--- EJS Views succesfully Compiled`).green);  
 
-exports.compile = compile;
+
+const _compile = compile;
+export { _compile as compile };
