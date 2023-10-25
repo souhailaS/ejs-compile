@@ -10,9 +10,7 @@ Install the module using locally using `npm i ejsc-views` or globally using `npm
 `ejsc-views` Compiles all `<views_dir>/*.ejs` files into a single `<views_dir>/views.js` file.
 
 ```javascript
-var ejsc = require('ejsc-views')
-// compile all views/*.ejs files into a single /public/js/views.js file
-ejsc.compile() 
+var ejsc = require('ejsc-views').compile() 
 ``` 
 
 The views directory and the output directory can be configured in `compile()`
