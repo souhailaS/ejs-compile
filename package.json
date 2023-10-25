@@ -1,5 +1,5 @@
 {
-  "name": "ejsc",
+  "name": "ejsc-views",
   "version": "1.1.0",
   "description": "Compile all views/*.ejs files into a single /public/js/views.js file",
   "main": "bin/ejsc.js",
