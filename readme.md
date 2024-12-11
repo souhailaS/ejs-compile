@@ -19,13 +19,13 @@ The **EJS Compiler** is a CLI tool for compiling `.ejs` templates into a single 
 ### 1. Install Globally (via npm)
 To install globally for CLI usage:
 ```bash
-npm install -g .
+npm install -g ejsc-views
 ```
 
 ### 2. Local Installation
 For usage in a specific project:
 ```bash
-npm install <path-to-tool>
+npm install ejsc-views
 ```
 
 ---
