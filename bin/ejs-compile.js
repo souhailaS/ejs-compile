@@ -120,9 +120,9 @@ function parseCLIArgs() {
 }
 
 // Main Entry Point
-if (require.main === module) {
+if (import.meta.url === `file://${process.argv[1]}`) {
   const { viewsDir, outputDir, details } = parseCLIArgs();
-  compileEJS(viewsDir, outputDir, details);
+  compile(viewsDir, outputDir, details);
 }
 
 // Export for programmatic usage
