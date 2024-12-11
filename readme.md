@@ -3,6 +3,8 @@
 
 The **EJS Compiler** is a CLI tool for compiling `.ejs` templates into a single JavaScript file. This simplifies including precompiled views in your projects, improving efficiency and maintainability.
 
+**Compatibility: Node 16.14.0 and later**
+
 ---
 
 ## Features
@@ -16,7 +18,7 @@ The **EJS Compiler** is a CLI tool for compiling `.ejs` templates into a single 
 
 ## Installation
 
-### 1. Install Globally (via npm)
+### 1. Install Globally 
 To install globally for CLI usage:
 ```bash
 npm install -g ejsc-views
