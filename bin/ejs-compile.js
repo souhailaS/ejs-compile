@@ -7,7 +7,7 @@
 import fs from "fs";
 import { compile as __compile } from "ejs";
 import { join, resolve } from "path";
-import glob from "glob";
+import { glob } from "glob";
 import colors from "ansicolor";
 import process from "process";
 colors.nice;
