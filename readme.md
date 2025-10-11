@@ -13,6 +13,7 @@ The **EJS Compiler** is a CLI tool for compiling `.ejs` templates into a single 
 - Supports detailed compilation logs for debugging and verification.
 - Works cross-platform (Windows, macOS, Linux).
 - Easy-to-use CLI interface or programmatic integration.
+- Dual module support: Works with both ES Modules (import) and CommonJS (require).
 
 ---
 
@@ -25,7 +26,7 @@ npm install -g ejsc-views
 ```
 
 ### 2. Local Installation
-For usage in a specific project:
+For usage in a specific project programmatically:
 ```bash
 npm install ejsc-views
 ```
@@ -66,11 +67,11 @@ ejsc [options]
 
 ### **Method 2: Programmatic Integration**
 
-You can integrate the compiler into your Node.js scripts.
+You can integrate the compiler into your Node.js scripts. The package supports both ES Modules (import) and CommonJS (require).
 
-#### Example Code:
+#### ES Modules (import):
 ```javascript
-import { compile } from "ejs-compile";
+import { compile } from "ejsc-views";
 
 const viewsDir = "src/views";
 const outputDir = "dist/js";
@@ -79,12 +80,25 @@ const details = true; // Enable detailed logs
 compile(viewsDir, outputDir, details);
 ```
 
+#### CommonJS (require):
+```javascript
+const { compileAsync } = require("ejsc-views");
+
+// Using async/await
+(async () => {
+  await compileAsync("src/views", "dist/js", true);
+})();
+```
+
+**Note:** When using `require()`, you must use the `compileAsync()` function with async/await due to ES module loading requirements.
+
 #### Parameters:
 | Parameter     | Type    | Description                                         | Default         |
 |---------------|---------|-----------------------------------------------------|-----------------|
 | `viewsDir`    | String  | Directory containing `.ejs` templates.              | `"views"`       |
 | `outputDir`   | String  | Directory for the compiled JavaScript output file.  | `"public/js"`   |
 | `details`     | Boolean | Whether to display detailed logs during compilation.| `false`         |
+| `cwd`         | String  | Working directory (optional).                       | `process.cwd()` |
 
 ---
 

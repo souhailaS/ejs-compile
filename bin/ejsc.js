@@ -3,7 +3,7 @@
  * CLI Usage: ejsc --views [views_dir] --output [output_dir] --details
  */
 
-import { compile } from "./ejs-compile.js";
+import { compile } from "../lib/index.js";
 import { Command } from "commander";
 import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
