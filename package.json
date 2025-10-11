@@ -1,12 +1,19 @@
 {
   "name": "ejsc-views",
-  "version": "1.1.8",
+  "version": "2.0.0",
   "description": "Compile all views/*.ejs files into a single /public/js/views.js file",
-  "main": "bin/ejsc.js",
+  "main": "./lib/index.cjs",
+  "module": "./lib/index.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./lib/index.cjs"
+    }
+  },
   "bin": {
     "ejsc": "./bin/ejsc.js"
   },
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
