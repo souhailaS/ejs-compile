@@ -5,9 +5,15 @@
 
 import { compile } from "./ejs-compile.js";
 import { Command } from "commander";
-import pkg from "../package.json" assert { type: "json" };
+import { readFileSync } from "fs";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
 import colors from "ansicolor";
 colors.nice;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const pkg = JSON.parse(readFileSync(join(__dirname, "../package.json"), "utf8"));
 
 // Initialize Commander.js
 const program = new Command();
