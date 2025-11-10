@@ -15,7 +15,7 @@
     "ejsc": "./bin/ejsc.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node bin/ejsc.js --views test/views --output test/output --details && node test/verify-output.js"
   },
   "repository": {
     "type": "git",
